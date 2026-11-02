@@ -1,0 +1,26 @@
+/* Preset de ex6tense: Kaleidochromic con rutas relativas, para que una sola línea fijada a un commit cargue todos los módulos de esa misma versión */
+@import url('../jf_font.css');
+@import url('../fixes.css');
+@import url('../base.css');
+@import url('../accentlist.css');
+@import url('../rounding.css');
+@import url('../smallercast.css');
+@import url('../episodelist/episodes_compactlist.css');
+@import url('../header/header_transparent-dashboard.css');
+@import url('../login/login_frame.css');
+@import url('../fields/fields_noborder.css');
+@import url('../cornerindicator/indicator_corner.css');
+@import url('../type/colorful.css');
+@import url('../titlepage/title_simple.css');
+@import url('../overlayprogress.css');
+@import url('../effects/hoverglow.css');
+@import url('../effects/glassy.css');
+
+
+
+:root {--rounding: 12px;}
+
+/*Style backdrop*/
+.backdropImage {
+  filter: blur(18px) saturate(120%) contrast(120%) brightness(40%);
+}
