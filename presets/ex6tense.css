@@ -37,3 +37,10 @@
 .detailPageWrapperContainer { background: transparent !important; }
 /* la portada flotaba y empujaba el título a la derecha además del hueco que ya le deja Jellyfin: así queda alineado con la información */
 .layout-desktop .detailImageContainer .card { position: absolute !important; }
+/* pan-animation en pantallas < 1600px hace zoom y se apaga cada 25 s: aquí un vaivén lento sin parpadeo en todas */
+@keyframes fondoLento {
+  from { transform: scale(1.12) translate3d(-1.5%, -1%, 0); }
+  to { transform: scale(1.12) translate3d(1.5%, 1%, 0); }
+}
+.backdropImage { animation: fondoLento 90s ease-in-out infinite alternate !important; }
+@media (prefers-reduced-motion: reduce) { .backdropImage { animation: none !important; } }
