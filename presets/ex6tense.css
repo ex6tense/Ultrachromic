@@ -22,7 +22,7 @@
 
 :root {--rounding: 12px;}
 
-/*Style backdrop*/
+/* banner nítido como en la ficha de ejemplo; solo un poco oscurecido para que el logo destaque */
 .backdropImage {
-  filter: blur(18px) saturate(120%) contrast(120%) brightness(40%);
+  filter: saturate(110%) brightness(75%);
 }
