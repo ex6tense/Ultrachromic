@@ -150,7 +150,7 @@ body, h1, h2, h3, h4, .textActionButton, .emby-button-foreground { text-shadow: 
   background: var(--lg-cristal), var(--lg-tinte) !important;
   -webkit-backdrop-filter: var(--lg-desenfoque);
   backdrop-filter: var(--lg-desenfoque);
-  box-shadow: var(--lg-sombra-suave);
+  box-shadow: var(--lg-brillo), var(--lg-sombra-suave);
   border-radius: 50% !important;
   color: #fff !important;
 }
@@ -274,7 +274,7 @@ body, h1, h2, h3, h4, .textActionButton, .emby-button-foreground { text-shadow: 
   background: var(--lg-cristal), var(--lg-tinte) !important;
   -webkit-backdrop-filter: var(--lg-desenfoque);
   backdrop-filter: var(--lg-desenfoque);
-  box-shadow: var(--lg-sombra-suave);
+  box-shadow: var(--lg-brillo), var(--lg-sombra-suave);
 }
 .videoOsd-appBar .MuiIconButton-root { width: 44px; height: 44px; border-radius: 50%; }
 .videoOsd-appBar > .MuiTypography-root { position: relative; padding: 9px 16px; border-radius: 999px; font-weight: 600; }
