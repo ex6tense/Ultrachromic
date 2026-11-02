@@ -43,7 +43,6 @@
 
 /* filo de luz en la navegación y los controles (el contenido queda limpio, sin cristal encima) */
 .skinHeader::before, .videoOsdBottom .osdControls::before,
-header.MuiAppBar-root .MuiButton-root::before, header.MuiAppBar-root .MuiIconButton-root::before,
 .detailButton::before, .emby-scrollbuttons-button::before, .emby-button.raised::before, .button-submit::before,
 .videoOsd-appBar .MuiIconButton-root::before, .videoOsd-appBar > .MuiTypography-root::before,
 .cardOverlayFab-primary::before, .cardOverlayButton-br .cardOverlayButton::before {
@@ -77,17 +76,21 @@ header.MuiAppBar-root { background: transparent !important; box-shadow: none !im
 header.MuiAppBar-root .MuiToolbar-root > .MuiStack-root,
 header.MuiAppBar-root .MuiToolbar-root > .MuiBox-root { display: flex; align-items: center; gap: 6px; }
 header.MuiAppBar-root .MuiToolbar-root > .MuiBox-root:last-child { margin-left: 8px; }
+/* las secciones van centradas en la barra y los iconos se quedan a la derecha; en pantallas estrechas no caben y vuelven a la izquierda */
+@media (min-width: 1000px) {
+  header.MuiAppBar-root .MuiToolbar-root > .MuiStack-root { position: absolute; left: 50%; translate: -50% 0; }
+  header.MuiAppBar-root .MuiToolbar-root > .MuiStack-root + .MuiBox-root { margin-left: auto; }
+}
 header.MuiAppBar-root .MuiButton-root, header.MuiAppBar-root .MuiIconButton-root {
   background: var(--lg-cristal), var(--lg-tinte) !important;
   -webkit-backdrop-filter: var(--lg-desenfoque);
   backdrop-filter: var(--lg-desenfoque);
-  box-shadow: var(--lg-brillo), var(--lg-sombra-suave);
+  box-shadow: var(--lg-sombra-suave);
   color: #fff !important;
 }
-/* píldoras y círculos a la misma altura, texto e iconos a escala, y un filo de luz más tenue que en los paneles grandes */
+/* píldoras y círculos a la misma altura, texto e iconos a escala; sin filo ni contorno: solo cristal, más plano */
 header.MuiAppBar-root .MuiButton-root, header.MuiAppBar-root .MuiIconButton-root {
   height: 40px;
-  --lg-filo: linear-gradient(135deg, rgba(255, 255, 255, .38), rgba(255, 255, 255, .06) 40%, rgba(255, 255, 255, .02) 60%, rgba(255, 255, 255, .16));
   transition: background-color .2s, transform .35s var(--lg-muelle);
 }
 header.MuiAppBar-root .MuiButton-root {
@@ -147,7 +150,7 @@ body, h1, h2, h3, h4, .textActionButton, .emby-button-foreground { text-shadow: 
   background: var(--lg-cristal), var(--lg-tinte) !important;
   -webkit-backdrop-filter: var(--lg-desenfoque);
   backdrop-filter: var(--lg-desenfoque);
-  box-shadow: var(--lg-brillo), var(--lg-sombra-suave);
+  box-shadow: var(--lg-sombra-suave);
   border-radius: 50% !important;
   color: #fff !important;
 }
@@ -271,7 +274,7 @@ body, h1, h2, h3, h4, .textActionButton, .emby-button-foreground { text-shadow: 
   background: var(--lg-cristal), var(--lg-tinte) !important;
   -webkit-backdrop-filter: var(--lg-desenfoque);
   backdrop-filter: var(--lg-desenfoque);
-  box-shadow: var(--lg-brillo), var(--lg-sombra-suave);
+  box-shadow: var(--lg-sombra-suave);
 }
 .videoOsd-appBar .MuiIconButton-root { width: 44px; height: 44px; border-radius: 50%; }
 .videoOsd-appBar > .MuiTypography-root { position: relative; padding: 9px 16px; border-radius: 999px; font-weight: 600; }
