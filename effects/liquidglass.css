@@ -176,6 +176,8 @@ header.MuiAppBar-root .MuiButton-root[aria-current="page"] {
   width: calc(100% - 48px) !important;
   max-width: 1240px;
   box-sizing: border-box;
+  /* Jellyfin le pone flex-grow y así ignoraba el ancho y los márgenes */
+  flex: 0 1 auto !important;
 }
 /* barra de tiempo fina y redondeada que engorda al pasar el ratón, como en Apple TV */
 .videoOsdBottom .mdl-slider-background-flex {
