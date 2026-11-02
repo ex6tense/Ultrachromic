@@ -77,8 +77,8 @@ header.MuiAppBar-root .MuiToolbar-root > .MuiStack-root,
 header.MuiAppBar-root .MuiToolbar-root > .MuiBox-root { display: flex; align-items: center; gap: 6px; }
 header.MuiAppBar-root .MuiToolbar-root > .MuiBox-root:last-child { margin-left: 8px; }
 /* las secciones van centradas en la barra y los iconos se quedan a la derecha; en pantallas estrechas no caben y vuelven a la izquierda */
-@media (min-width: 1000px) {
-  header.MuiAppBar-root .MuiToolbar-root > .MuiStack-root { position: absolute; left: 50%; translate: -50% 0; }
+@media (min-width: 1200px) {
+  header.MuiAppBar-root .MuiToolbar-root > .MuiStack-root { position: absolute; left: 50%; translate: -50% 0; width: max-content; }
   header.MuiAppBar-root .MuiToolbar-root > .MuiStack-root + .MuiBox-root { margin-left: auto; }
 }
 header.MuiAppBar-root .MuiButton-root, header.MuiAppBar-root .MuiIconButton-root {
