@@ -22,7 +22,10 @@
 
 :root {--rounding: 12px;}
 
-/* banner nítido como en la ficha de ejemplo; solo un poco oscurecido para que el logo destaque */
+/* ficha como en el ejemplo de Ultrachromic: el banner de arriba (.itemBackdrop) nítido y, detrás de la información,
+   la misma imagen difuminada. .backdropImage es esa capa de fondo de toda la página */
 .backdropImage {
-  filter: saturate(110%) brightness(75%);
+  filter: blur(18px) saturate(120%) brightness(50%);
 }
+/* Jellyfin 10.10+ pinta la zona de información de gris opaco (#101010) y tapaba el fondo difuminado */
+.detailPageWrapperContainer { background: transparent !important; }
