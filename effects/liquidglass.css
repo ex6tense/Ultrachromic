@@ -1,0 +1,232 @@
+/* Liquid Glass para Ultrachromic: cristal claro con filo de luz en la navegación y los controles (barra superior en píldoras,
+   menús, ventanas, botones, burbujas de las tarjetas y reproductor). Las portadas y el contenido quedan limpios.
+   Va al final del preset para ganar a glassy.css. Traído de ex6tense/jellyfin-liquid-glass. */
+:root {
+  --lg-radio: 16px;
+  --lg-radio-panel: 24px;
+  /* Liquid Glass es más claro que el cristal esmerilado: poco desenfoque, mucha saturación y un filo de luz marcado */
+  --lg-cristal: linear-gradient(135deg, rgba(255, 255, 255, .12), rgba(255, 255, 255, .02));
+  --lg-tinte: rgba(20, 20, 24, .32);         /* navegación y controles */
+  --lg-tinte-texto: rgba(20, 20, 24, .62);   /* paneles con texto: menús, ventanas, avisos (contraste ≥ 4.5:1) */
+  --lg-borde: rgba(255, 255, 255, .18);
+  --lg-brillo: inset 0 1px 0 rgba(255, 255, 255, .3), inset 0 -1px 0 rgba(255, 255, 255, .05);
+  --lg-sombra: 0 12px 40px rgba(0, 0, 0, .45);
+  --lg-desenfoque: blur(16px) saturate(190%) brightness(1.06);
+  /* filo de luz: brillante arriba a la izquierda, casi nada en medio y un rebote abajo a la derecha */
+  --lg-filo: linear-gradient(135deg, rgba(255, 255, 255, .6), rgba(255, 255, 255, .1) 35%, rgba(255, 255, 255, .02) 60%, rgba(255, 255, 255, .28));
+  --lg-muelle: cubic-bezier(.34, 1.56, .64, 1);
+  --lg-texto-2: rgba(255, 255, 255, .55);
+}
+
+/* ---------- superficies de cristal reutilizadas ---------- */
+/* Jellyfin 12 dibuja la barra, el menú lateral y los menús con componentes MUI; .skinHeader/.mainDrawer son los de la interfaz clásica */
+.skinHeader,
+.mainDrawer, .MuiDrawer-paper,
+.MuiMenu-paper, .MuiPopover-paper,
+.dialog, .actionSheet,
+.toast,
+.videoOsdBottom .osdControls,
+#loginPage .manualLoginForm, #loginPage .visualLoginForm {
+  background: var(--lg-cristal), var(--lg-tinte) !important;
+  -webkit-backdrop-filter: var(--lg-desenfoque);
+  backdrop-filter: var(--lg-desenfoque);
+  border: 1px solid var(--lg-borde) !important;
+  box-shadow: var(--lg-brillo), var(--lg-sombra) !important;
+}
+/* donde hay texto que leer el cristal se oscurece más, para que se lea sobre cualquier fondo */
+.mainDrawer, .MuiDrawer-paper, .MuiMenu-paper, .MuiPopover-paper, .dialog, .actionSheet, .toast,
+#loginPage .manualLoginForm, #loginPage .visualLoginForm {
+  background: var(--lg-cristal), var(--lg-tinte-texto) !important;
+}
+
+/* filo de luz en la navegación y los controles (el contenido queda limpio, sin cristal encima) */
+.skinHeader::before, .videoOsdBottom .osdControls::before,
+header.MuiAppBar-root .MuiButton-root::before, header.MuiAppBar-root .MuiIconButton-root::before,
+.detailButton::before, .emby-scrollbuttons-button::before, .emby-button.raised::before, .button-submit::before,
+.videoOsd-appBar .MuiIconButton-root::before, .videoOsd-appBar > .MuiTypography-root::before,
+.cardOverlayFab-primary::before, .cardOverlayButton-br .cardOverlayButton::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  border-radius: inherit;
+  padding: 1px;
+  background: var(--lg-filo);
+  -webkit-mask: linear-gradient(#000 0 0) content-box, linear-gradient(#000 0 0);
+  -webkit-mask-composite: xor;
+  mask-composite: exclude;
+  pointer-events: none;
+}
+.skinHeader, .videoOsdBottom .osdControls,
+.detailButton, .emby-scrollbuttons-button, .emby-button.raised, .button-submit { border-color: transparent !important; }
+.videoOsdBottom .osdControls { position: relative; }
+
+/* ---------- barra superior: flota, y cada enlace e icono es su propia píldora ---------- */
+.skinHeader, header.MuiAppBar-root {
+  top: 10px !important;
+  left: 16px !important;
+  right: 16px !important;
+  width: auto !important;
+  border-radius: 22px;
+  /* el cristal es claro: con una portada muy blanca debajo, la sombra mantiene el texto legible */
+  text-shadow: 0 1px 2px rgba(0, 0, 0, .45);
+}
+/* la barra de Jellyfin 12 no lleva fondo: el cristal va en cada píldora */
+header.MuiAppBar-root { background: transparent !important; box-shadow: none !important; border: 0 !important; }
+header.MuiAppBar-root .MuiToolbar-root > .MuiStack-root,
+header.MuiAppBar-root .MuiToolbar-root > .MuiBox-root { display: flex; align-items: center; gap: 8px; }
+header.MuiAppBar-root .MuiToolbar-root > .MuiBox-root:last-child { margin-left: 8px; }
+header.MuiAppBar-root .MuiButton-root, header.MuiAppBar-root .MuiIconButton-root {
+  background: var(--lg-cristal), var(--lg-tinte) !important;
+  -webkit-backdrop-filter: var(--lg-desenfoque);
+  backdrop-filter: var(--lg-desenfoque);
+  box-shadow: var(--lg-brillo), 0 8px 24px rgba(0, 0, 0, .35);
+  color: #fff !important;
+}
+header.MuiAppBar-root .MuiButton-root { border-radius: 999px !important; padding: 6px 16px !important; text-transform: none; }
+header.MuiAppBar-root .MuiIconButton-root { border-radius: 50% !important; width: 44px; height: 44px; }
+header.MuiAppBar-root .MuiButton-root:hover, header.MuiAppBar-root .MuiIconButton-root:hover,
+header.MuiAppBar-root .MuiButton-root[aria-current="page"] {
+  background: var(--lg-cristal), rgba(255, 255, 255, .18) !important;
+}
+/* en el reproductor la barra se pliega: sin cristal ni borde, o queda una línea suelta sobre el vídeo */
+.transparentDocument .skinHeader, .transparentDocument header.MuiAppBar-root {
+  background: transparent !important;
+  border-color: transparent !important;
+  box-shadow: none !important;
+  -webkit-backdrop-filter: none;
+  backdrop-filter: none;
+}
+.transparentDocument .skinHeader:not(.osdHeader)::before, .transparentDocument header.MuiAppBar-root::before { content: none; }
+/* la barra baja 10 px al flotar: las páginas bajan lo mismo para que no pise los títulos */
+.mainAnimatedPage.libraryPage, .mainAnimatedPage.itemDetailPage { margin-top: 20px; }
+/* pestañas de las bibliotecas (Películas, Sugerencias…): la activa es una píldora de cristal */
+.emby-tab-button { border-radius: 999px; }
+.emby-tab-button-active {
+  background: rgba(255, 255, 255, .14) !important;
+  box-shadow: var(--lg-brillo);
+  color: #fff !important;
+}
+.headerTabs .emby-tabs-slider { border-bottom: 0 !important; }
+
+/* ---------- menú lateral ---------- */
+.mainDrawer, .MuiDrawer-paper { border-radius: 0 var(--lg-radio-panel) var(--lg-radio-panel) 0; border-left: 0 !important; }
+.MuiMenu-paper, .MuiPopover-paper { border-radius: 18px !important; overflow: hidden; color: #fff !important; }
+.MuiMenu-paper .MuiList-root, .MuiPopover-paper .MuiList-root { background: transparent !important; }
+.MuiMenuItem-root, .MuiListItemButton-root { border-radius: 12px; margin: 2px 6px; }
+.MuiListItemButton-root.Mui-selected { background: rgba(255, 255, 255, .14) !important; }
+.navMenuOption { border-radius: 12px; margin: 2px 8px; }
+.navMenuOption-selected { background: rgba(255, 255, 255, .14) !important; }
+
+/* ---------- tarjetas: botones al pasar el ratón como burbujas de cristal ---------- */
+.cardOverlayFab-primary, .cardOverlayButton-br .cardOverlayButton {
+  background: var(--lg-cristal), var(--lg-tinte) !important;
+  -webkit-backdrop-filter: var(--lg-desenfoque);
+  backdrop-filter: var(--lg-desenfoque);
+  box-shadow: var(--lg-brillo), 0 6px 20px rgba(0, 0, 0, .35);
+  border-radius: 50% !important;
+  color: #fff !important;
+}
+.cardOverlayButton-br .cardOverlayButton { margin-left: 4px; }
+.cardOverlayFab-primary .cardOverlayButtonIcon, .cardOverlayButton-br .cardOverlayButtonIcon { color: #fff !important; }
+.cardOverlayFab-primary:hover, .cardOverlayButton-br .cardOverlayButton:hover { background: var(--lg-cristal), rgba(255, 255, 255, .2) !important; }
+
+/* ---------- botones ---------- */
+.emby-button.raised, .button-submit, .detailButton, .emby-scrollbuttons-button {
+  border-radius: 999px !important;
+  background: var(--lg-cristal), rgba(255, 255, 255, .05) !important;
+  -webkit-backdrop-filter: var(--lg-desenfoque);
+  backdrop-filter: var(--lg-desenfoque);
+  border: 1px solid var(--lg-borde) !important;
+  box-shadow: var(--lg-brillo);
+  color: #fff !important;
+}
+.button-submit { background: var(--lg-cristal), rgba(255, 255, 255, .22) !important; }
+.emby-button.raised:hover, .detailButton:hover, .emby-scrollbuttons-button:hover {
+  background: var(--lg-cristal), rgba(255, 255, 255, .16) !important;
+}
+/* al pulsar, el cristal se hunde un poco y vuelve con rebote; hundirse es más rápido que volver */
+.emby-button, .detailButton, .emby-scrollbuttons-button, .MuiIconButton-root {
+  transition: transform .35s var(--lg-muelle), background-color .2s;
+}
+.emby-button:active, .detailButton:active, .emby-scrollbuttons-button:active, .MuiIconButton-root:active {
+  transform: scale(.94);
+  transition-duration: .12s;
+}
+/* foco visible al navegar con teclado o mando, también en los botones */
+.emby-button:focus-visible, .detailButton:focus-visible, .emby-scrollbuttons-button:focus-visible,
+.MuiButtonBase-root:focus-visible {
+  outline: 2px solid #fff !important;
+  outline-offset: 2px;
+}
+
+/* ---------- menús, ventanas y avisos ---------- */
+.dialog, .actionSheet { border-radius: var(--lg-radio-panel) !important; }
+.formDialogHeader, .formDialogFooter { background: transparent !important; }
+.actionSheetMenuItem { border-radius: 12px; }
+.toast { border-radius: 999px !important; color: #fff !important; }
+
+/* ---------- reproductor: controles en una cápsula flotante ---------- */
+/* .videoOsdBottom deja ~110 px arriba para su degradado; el cristal va solo en .osdControls (tiempo y botones) */
+.videoOsdBottom { background: transparent !important; }
+.videoOsdBottom .osdControls {
+  margin: 0 16px;
+  padding: 8px 16px 4px !important;
+  border-radius: var(--lg-radio-panel);
+  /* con width: 100% (otros temas lo ponen) más el margen, la cápsula se salía 32 px por la derecha */
+  width: auto !important;
+  box-sizing: border-box;
+}
+/* vista previa al pasar por la barra de tiempo: esquinas redondeadas y marco de cristal */
+.sliderBubble {
+  border-radius: 14px;
+  overflow: hidden;
+  background: var(--lg-cristal), var(--lg-tinte-texto) !important;
+  border: 1px solid var(--lg-borde);
+  box-shadow: var(--lg-brillo), 0 12px 32px rgba(0, 0, 0, .5);
+}
+.sliderBubble .chapterThumbContainer, .sliderBubble .chapterThumbWrapper { border-radius: 13px; }
+/* barra superior del reproductor (volver, título, botones): en vez de una franja, burbujas sueltas de cristal.
+   También lleva .skinHeader, así que se anula la cápsula flotante de la barra normal */
+.skinHeader.osdHeader {
+  top: 0 !important;
+  left: 0 !important;
+  right: 0 !important;
+  width: 100% !important;
+  background: transparent !important;
+  border: 0 !important;
+  box-shadow: none !important;
+  -webkit-backdrop-filter: none !important;
+  backdrop-filter: none !important;
+}
+.skinHeader.osdHeader::before { content: none !important; }
+.videoOsd-appBar { gap: 8px; padding-top: 12px !important; }
+.videoOsd-appBar .MuiIconButton-root, .videoOsd-appBar > .MuiTypography-root {
+  background: var(--lg-cristal), var(--lg-tinte) !important;
+  -webkit-backdrop-filter: var(--lg-desenfoque);
+  backdrop-filter: var(--lg-desenfoque);
+  box-shadow: var(--lg-brillo), var(--lg-sombra);
+}
+.videoOsd-appBar .MuiIconButton-root { width: 44px; height: 44px; border-radius: 50%; }
+.videoOsd-appBar > .MuiTypography-root { position: relative; padding: 9px 16px; border-radius: 999px; font-weight: 600; }
+
+/* deslizadores blancos como en Apple TV, en vez del azul de Jellyfin */
+.mdl-slider-background-flex { background: rgba(255, 255, 255, .22) !important; }
+.mdl-slider-background-upper { background: rgba(255, 255, 255, .4) !important; }
+.mdl-slider-background-lower { background: #fff !important; }
+.mdl-slider::-webkit-slider-thumb { background: #fff !important; }
+.mdl-slider::-moz-range-thumb { background: #fff !important; }
+
+/* ---------- login ---------- */
+#loginPage .manualLoginForm, #loginPage .visualLoginForm { border-radius: var(--lg-radio-panel); padding: 1.5em; }
+
+/* ---------- móvil ---------- */
+@media (max-width: 600px) {
+  .skinHeader, header.MuiAppBar-root { left: 8px !important; right: 8px !important; top: 6px !important; border-radius: 18px; }
+  .videoOsdBottom .osdControls { margin: 0 8px; }
+}
+
+/* ---------- accesibilidad ---------- */
+@media (prefers-reduced-motion: reduce) {
+  .emby-button, .detailButton, .emby-scrollbuttons-button, .MuiIconButton-root { transition: none; }
+  .emby-button:active, .detailButton:active, .emby-scrollbuttons-button:active, .MuiIconButton-root:active { transform: none; }
+}
