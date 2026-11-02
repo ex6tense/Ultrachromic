@@ -168,14 +168,54 @@ header.MuiAppBar-root .MuiButton-root[aria-current="page"] {
 /* ---------- reproductor: controles en una cápsula flotante ---------- */
 /* .videoOsdBottom deja ~110 px arriba para su degradado; el cristal va solo en .osdControls (tiempo y botones) */
 .videoOsdBottom { background: transparent !important; }
+/* cápsula centrada y con tope de ancho: de borde a borde en una pantalla grande se veía tosca */
 .videoOsdBottom .osdControls {
-  margin: 0 16px;
-  padding: 8px 16px 4px !important;
-  border-radius: var(--lg-radio-panel);
-  /* con width: 100% (otros temas lo ponen) más el margen, la cápsula se salía 32 px por la derecha */
-  width: auto !important;
+  margin: 0 auto 20px !important;
+  padding: 12px 24px 6px !important;
+  border-radius: 30px;
+  width: calc(100% - 48px) !important;
+  max-width: 1240px;
   box-sizing: border-box;
 }
+/* barra de tiempo fina y redondeada que engorda al pasar el ratón, como en Apple TV */
+.videoOsdBottom .mdl-slider-background-flex {
+  height: 4px !important;
+  margin-top: -2px !important;
+  border-radius: 4px;
+  background: rgba(255, 255, 255, .22) !important;
+  transition: height .2s, margin-top .2s;
+}
+.videoOsdBottom .sliderContainer:hover .mdl-slider-background-flex { height: 8px !important; margin-top: -4px !important; }
+.videoOsdBottom .mdl-slider-background-lower, .videoOsdBottom .mdl-slider-background-upper { border-radius: 4px; }
+/* el punto solo aparece al pasar el ratón o con el foco del teclado */
+.osdPositionSlider::-webkit-slider-thumb {
+  width: 14px !important; height: 14px !important;
+  box-shadow: 0 0 0 5px rgba(255, 255, 255, .16), 0 2px 8px rgba(0, 0, 0, .5);
+  transform: scale(0) !important;
+}
+.sliderContainer:hover .osdPositionSlider::-webkit-slider-thumb, .osdPositionSlider:focus-visible::-webkit-slider-thumb { transform: scale(1) !important; }
+.osdPositionSlider::-moz-range-thumb { width: 14px; height: 14px; transform: scale(0); transition: transform .2s; }
+.sliderContainer:hover .osdPositionSlider::-moz-range-thumb, .osdPositionSlider:focus-visible::-moz-range-thumb { transform: scale(1); }
+/* capítulos: en vez de rayas azules que sobresalen, cortes finos dentro de la barra */
+.videoOsdBottom .sliderMarkerContainer { top: 50%; }
+.videoOsdBottom .sliderMarker {
+  height: 8px !important;
+  transform: translateY(-50%) !important;
+  background: rgba(10, 10, 14, .7) !important;
+}
+/* tiempos: cifras del mismo ancho para que no bailen, y en gris para que manden los controles */
+.videoOsdBottom .osdPositionText, .videoOsdBottom .osdDurationText {
+  font-size: .85em;
+  font-variant-numeric: tabular-nums;
+  color: rgba(255, 255, 255, .7);
+  min-width: 4.2em;
+}
+.videoOsdBottom .osdDurationText { text-align: right; }
+.videoOsdBottom .osdTimeText { font-size: .85em; color: rgba(255, 255, 255, .55); }
+/* botones: icono limpio con un círculo de cristal al pasar el ratón */
+.videoOsdBottom .buttons .paper-icon-button-light { border-radius: 50%; transition: background-color .2s, transform .35s var(--lg-muelle); }
+.videoOsdBottom .buttons .paper-icon-button-light:hover { background: rgba(255, 255, 255, .14) !important; }
+.videoOsdBottom .btnPause { transform: scale(1.15); }
 /* vista previa al pasar por la barra de tiempo: esquinas redondeadas y marco de cristal */
 .sliderBubble {
   border-radius: 14px;
@@ -222,7 +262,7 @@ header.MuiAppBar-root .MuiButton-root[aria-current="page"] {
 /* ---------- móvil ---------- */
 @media (max-width: 600px) {
   .skinHeader, header.MuiAppBar-root { left: 8px !important; right: 8px !important; top: 6px !important; border-radius: 18px; }
-  .videoOsdBottom .osdControls { margin: 0 8px; }
+  .videoOsdBottom .osdControls { width: calc(100% - 16px) !important; margin-bottom: 8px !important; padding: 10px 14px 4px !important; }
 }
 
 /* ---------- accesibilidad ---------- */
