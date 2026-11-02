@@ -29,3 +29,5 @@
 }
 /* Jellyfin 10.10+ pinta la zona de información de gris opaco (#101010) y tapaba el fondo difuminado */
 .detailPageWrapperContainer { background: transparent !important; }
+/* la portada flotaba y empujaba el título a la derecha además del hueco que ya le deja Jellyfin: así queda alineado con la información */
+.layout-desktop .detailImageContainer .card { position: absolute !important; }
