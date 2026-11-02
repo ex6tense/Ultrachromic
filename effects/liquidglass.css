@@ -75,7 +75,7 @@ header.MuiAppBar-root .MuiButton-root::before, header.MuiAppBar-root .MuiIconBut
 /* la barra de Jellyfin 12 no lleva fondo: el cristal va en cada píldora */
 header.MuiAppBar-root { background: transparent !important; box-shadow: none !important; border: 0 !important; }
 header.MuiAppBar-root .MuiToolbar-root > .MuiStack-root,
-header.MuiAppBar-root .MuiToolbar-root > .MuiBox-root { display: flex; align-items: center; gap: 8px; }
+header.MuiAppBar-root .MuiToolbar-root > .MuiBox-root { display: flex; align-items: center; gap: 6px; }
 header.MuiAppBar-root .MuiToolbar-root > .MuiBox-root:last-child { margin-left: 8px; }
 header.MuiAppBar-root .MuiButton-root, header.MuiAppBar-root .MuiIconButton-root {
   background: var(--lg-cristal), var(--lg-tinte) !important;
@@ -84,8 +84,25 @@ header.MuiAppBar-root .MuiButton-root, header.MuiAppBar-root .MuiIconButton-root
   box-shadow: var(--lg-brillo), var(--lg-sombra-suave);
   color: #fff !important;
 }
-header.MuiAppBar-root .MuiButton-root { border-radius: 999px !important; padding: 6px 16px !important; text-transform: none; }
-header.MuiAppBar-root .MuiIconButton-root { border-radius: 50% !important; width: 44px; height: 44px; }
+/* píldoras y círculos a la misma altura, texto e iconos a escala, y un filo de luz más tenue que en los paneles grandes */
+header.MuiAppBar-root .MuiButton-root, header.MuiAppBar-root .MuiIconButton-root {
+  height: 40px;
+  --lg-filo: linear-gradient(135deg, rgba(255, 255, 255, .38), rgba(255, 255, 255, .06) 40%, rgba(255, 255, 255, .02) 60%, rgba(255, 255, 255, .16));
+  transition: background-color .2s, transform .35s var(--lg-muelle);
+}
+header.MuiAppBar-root .MuiButton-root {
+  border-radius: 999px !important;
+  padding: 0 16px !important;
+  min-width: 0;
+  text-transform: none;
+  font-size: 14px !important;
+  font-weight: 500 !important;
+  letter-spacing: -.01em;
+}
+header.MuiAppBar-root .MuiButton-startIcon { margin-right: 7px; }
+header.MuiAppBar-root .MuiButton-startIcon > *, header.MuiAppBar-root .MuiButton-root .material-icons { font-size: 18px !important; }
+header.MuiAppBar-root .MuiIconButton-root { border-radius: 50% !important; width: 40px; }
+header.MuiAppBar-root .MuiIconButton-root svg, header.MuiAppBar-root .MuiIconButton-root .material-icons { font-size: 20px !important; }
 header.MuiAppBar-root .MuiButton-root:hover, header.MuiAppBar-root .MuiIconButton-root:hover,
 header.MuiAppBar-root .MuiButton-root[aria-current="page"] {
   background: var(--lg-cristal), rgba(255, 255, 255, .18) !important;
