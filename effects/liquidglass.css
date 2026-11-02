@@ -20,6 +20,13 @@
   --lg-texto-2: rgba(255, 255, 255, .55);
 }
 
+/* ---------- fondo ---------- */
+/* el fondo difuminado abstracto de Ultrachromic (el de su login) en todas las páginas en vez del gris plano; en las fichas
+   con imagen propia (.withBackdrop) y en el reproductor manda la imagen o el vídeo. La ruta es relativa para que vaya con la versión fijada */
+html:not(.transparentDocument) .backgroundContainer:not(.withBackdrop) {
+  background: url("../assets/background.png") center / cover no-repeat fixed, #101018 !important;
+}
+
 /* ---------- superficies de cristal reutilizadas ---------- */
 /* Jellyfin 12 dibuja la barra, el menú lateral y los menús con componentes MUI; .skinHeader/.mainDrawer son los de la interfaz clásica */
 .skinHeader,
