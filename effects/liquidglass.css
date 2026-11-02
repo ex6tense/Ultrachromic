@@ -21,10 +21,14 @@
 }
 
 /* ---------- fondo ---------- */
-/* el fondo difuminado abstracto de Ultrachromic (el de su login) en todas las páginas en vez del gris plano; en las fichas
-   con imagen propia (.withBackdrop) y en el reproductor manda la imagen o el vídeo. La ruta es relativa para que vaya con la versión fijada */
+/* degradado de color en las páginas sin imagen de fondo; con Fondos activado (.withBackdrop) y en el reproductor manda la imagen o el vídeo */
 html:not(.transparentDocument) .backgroundContainer:not(.withBackdrop) {
-  background: url("../assets/background.png") center / cover no-repeat fixed, #101018 !important;
+  background:
+    radial-gradient(60% 70% at 15% 20%, rgba(124, 58, 237, .55), transparent 70%),
+    radial-gradient(55% 60% at 85% 15%, rgba(14, 165, 233, .45), transparent 70%),
+    radial-gradient(60% 60% at 75% 90%, rgba(236, 72, 153, .38), transparent 70%),
+    radial-gradient(50% 50% at 20% 95%, rgba(20, 184, 166, .35), transparent 70%),
+    #0d0b1e fixed !important;
 }
 
 /* ---------- superficies de cristal reutilizadas ---------- */

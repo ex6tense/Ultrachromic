@@ -22,10 +22,16 @@
 
 :root {--rounding: 12px;}
 
-/* ficha como en el ejemplo de Ultrachromic: el banner de arriba (.itemBackdrop) nítido y, detrás de la información,
-   la misma imagen difuminada. .backdropImage es esa capa de fondo de toda la página */
+/* fondo = imagen de lo que se ve, muy difuminada (activar Ajustes > Pantalla > Fondos). .backdropImage es esa capa de
+   toda la página; en la ficha el banner de arriba (.itemBackdrop) va nítido */
 .backdropImage {
-  filter: blur(18px) saturate(120%) brightness(50%);
+  filter: blur(28px) saturate(150%) brightness(62%);
+}
+/* viñeta para que el texto se lea sobre fondos claros */
+.backdropContainer::after {
+  content: ""; position: fixed; inset: 0; pointer-events: none;
+  background: radial-gradient(120% 90% at 50% 40%, transparent 40%, rgba(0,0,0,.45)),
+    linear-gradient(rgba(0,0,0,.25), transparent 30%, transparent 70%, rgba(0,0,0,.35));
 }
 /* Jellyfin 10.10+ pinta la zona de información de gris opaco (#101010) y tapaba el fondo difuminado */
 .detailPageWrapperContainer { background: transparent !important; }
