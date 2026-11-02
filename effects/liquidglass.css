@@ -10,7 +10,9 @@
   --lg-tinte-texto: rgba(20, 20, 24, .62);   /* paneles con texto: menús, ventanas, avisos (contraste ≥ 4.5:1) */
   --lg-borde: rgba(255, 255, 255, .18);
   --lg-brillo: inset 0 1px 0 rgba(255, 255, 255, .3), inset 0 -1px 0 rgba(255, 255, 255, .05);
-  --lg-sombra: 0 12px 40px rgba(0, 0, 0, .45);
+  /* sombras en capas: una corta que asienta y una amplia muy tenue; una sola sombra grande y oscura se veía como una mancha */
+  --lg-sombra: 0 1px 3px rgba(0, 0, 0, .16), 0 10px 30px rgba(0, 0, 0, .22);
+  --lg-sombra-suave: 0 1px 2px rgba(0, 0, 0, .14), 0 4px 12px rgba(0, 0, 0, .14);
   --lg-desenfoque: blur(16px) saturate(190%) brightness(1.06);
   /* filo de luz: brillante arriba a la izquierda, casi nada en medio y un rebote abajo a la derecha */
   --lg-filo: linear-gradient(135deg, rgba(255, 255, 255, .6), rgba(255, 255, 255, .1) 35%, rgba(255, 255, 255, .02) 60%, rgba(255, 255, 255, .28));
@@ -79,7 +81,7 @@ header.MuiAppBar-root .MuiButton-root, header.MuiAppBar-root .MuiIconButton-root
   background: var(--lg-cristal), var(--lg-tinte) !important;
   -webkit-backdrop-filter: var(--lg-desenfoque);
   backdrop-filter: var(--lg-desenfoque);
-  box-shadow: var(--lg-brillo), 0 8px 24px rgba(0, 0, 0, .35);
+  box-shadow: var(--lg-brillo), var(--lg-sombra-suave);
   color: #fff !important;
 }
 header.MuiAppBar-root .MuiButton-root { border-radius: 999px !important; padding: 6px 16px !important; text-transform: none; }
@@ -117,12 +119,18 @@ header.MuiAppBar-root .MuiButton-root[aria-current="page"] {
 .navMenuOption { border-radius: 12px; margin: 2px 8px; }
 .navMenuOption-selected { background: rgba(255, 255, 255, .14) !important; }
 
+/* ---------- sombras de Ultrachromic, más finas ---------- */
+/* colorful.css pone un halo negro a todo el texto y a las portadas, y base.css una sombra negra dura a la vista previa de capítulos */
+body, h1, h2, h3, h4, .textActionButton, .emby-button-foreground { text-shadow: 0 1px 2px rgba(0, 0, 0, .3) !important; }
+.blurhashed { box-shadow: 0 1px 2px rgba(0, 0, 0, .16), 0 6px 18px rgba(0, 0, 0, .2) !important; }
+.chapterThumb, .chapterThumbContainer { box-shadow: none !important; }
+
 /* ---------- tarjetas: botones al pasar el ratón como burbujas de cristal ---------- */
 .cardOverlayFab-primary, .cardOverlayButton-br .cardOverlayButton {
   background: var(--lg-cristal), var(--lg-tinte) !important;
   -webkit-backdrop-filter: var(--lg-desenfoque);
   backdrop-filter: var(--lg-desenfoque);
-  box-shadow: var(--lg-brillo), 0 6px 20px rgba(0, 0, 0, .35);
+  box-shadow: var(--lg-brillo), var(--lg-sombra-suave);
   border-radius: 50% !important;
   color: #fff !important;
 }
@@ -192,7 +200,7 @@ header.MuiAppBar-root .MuiButton-root[aria-current="page"] {
 /* el punto solo aparece al pasar el ratón o con el foco del teclado */
 .osdPositionSlider::-webkit-slider-thumb {
   width: 14px !important; height: 14px !important;
-  box-shadow: 0 0 0 5px rgba(255, 255, 255, .16), 0 2px 8px rgba(0, 0, 0, .5);
+  box-shadow: 0 0 0 5px rgba(255, 255, 255, .16), 0 1px 4px rgba(0, 0, 0, .3);
   transform: scale(0) !important;
 }
 .sliderContainer:hover .osdPositionSlider::-webkit-slider-thumb, .osdPositionSlider:focus-visible::-webkit-slider-thumb { transform: scale(1) !important; }
@@ -224,7 +232,7 @@ header.MuiAppBar-root .MuiButton-root[aria-current="page"] {
   overflow: hidden;
   background: var(--lg-cristal), var(--lg-tinte-texto) !important;
   border: 1px solid var(--lg-borde);
-  box-shadow: var(--lg-brillo), 0 12px 32px rgba(0, 0, 0, .5);
+  box-shadow: var(--lg-brillo), var(--lg-sombra);
 }
 .sliderBubble .chapterThumbContainer, .sliderBubble .chapterThumbWrapper { border-radius: 13px; }
 /* barra superior del reproductor (volver, título, botones): en vez de una franja, burbujas sueltas de cristal.
@@ -246,7 +254,7 @@ header.MuiAppBar-root .MuiButton-root[aria-current="page"] {
   background: var(--lg-cristal), var(--lg-tinte) !important;
   -webkit-backdrop-filter: var(--lg-desenfoque);
   backdrop-filter: var(--lg-desenfoque);
-  box-shadow: var(--lg-brillo), var(--lg-sombra);
+  box-shadow: var(--lg-brillo), var(--lg-sombra-suave);
 }
 .videoOsd-appBar .MuiIconButton-root { width: 44px; height: 44px; border-radius: 50%; }
 .videoOsd-appBar > .MuiTypography-root { position: relative; padding: 9px 16px; border-radius: 999px; font-weight: 600; }
